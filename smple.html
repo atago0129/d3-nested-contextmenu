@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>smaple</title>
+</head>
+<body>
+<div id="main" style="width: 500px;height: 400px;"></div>
+<script src="//d3js.org/d3.v5.min.js"></script>
+<script src="./lib/d3-nested-contextmenu.js"></script>
+<script>
+  var items = [
+    {
+      label: function (d) {
+        return d;
+      },
+      items: [
+        {
+          label: "red",
+          onClick: function () {
+            this.style.fill = "#ff0000";
+          }
+        },
+        {
+          label: "blue",
+          action: function () {
+            this.style.fill = "#0000ff";
+          }
+        },
+        {
+          label: "index",
+          action: function (d, i) {
+            alert(i + 1);
+          }
+        }
+      ],
+      action: function () {
+        alert('hoge');
+      }
+    },
+    {
+      label: "background",
+      items: [
+        {
+          label: "red",
+          onClick: function () {
+            svg.node().style.background = "#ff0000";
+          }
+        },
+        {
+          label: "blue",
+          action: function () {
+            svg.node().style.background = "#0000ff";
+          }
+        },
+        {
+          label: "pink",
+          action: function() {
+            alert('pink is clicked!');
+          },
+          items: function() {
+            return [
+              {
+                label: "deep pink",
+                action: function () {
+                  svg.node().style.background = "#ff1493";
+                }
+              },
+              {
+                label() {
+                  return "shocking pink";
+                },
+                action() {
+                  svg.node().style.background = "#fc0fc0";
+                }
+              }
+            ];
+          }
+        }
+      ]
+    }
+  ];
+  svg = d3.select('#main')
+    .append('svg')
+    .attr('width', '100%')
+    .attr('height', '100%');
+
+  svg.selectAll('circles')
+    .data(['circle1', 'circle2', 'circle3', 'circle4'])
+    .enter()
+    .append('circle')
+    .attr('r', 20)
+    .attr('fill', '#ff6040')
+    .attr('cx', function(d, i) {
+      return (i + 1) * 100;
+    })
+    .attr('cy', function() {
+      return 100;
+    })
+    .on('contextmenu', d3.contextmenu(items));
+</script>
+</body>
+</html>

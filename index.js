@@ -1,0 +1,1 @@
+export {default as contextmenu} from './src/app';
