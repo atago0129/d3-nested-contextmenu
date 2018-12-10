@@ -28,8 +28,4 @@ export class ItemStyle {
   get onMouseFillColor(): string {
     return this._onMouseFillColor;
   }
-
-  public getFontSize(): number {
-    return this._fontSize;
-  }
 }
