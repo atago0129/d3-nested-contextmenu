@@ -77,7 +77,7 @@ export class Canvas {
       .attr('height', (item, i) => (labelSizes.heights[i]))
       .style('cursor', 'default');
     contextmenuItems.append('rect')
-      .style('fill', (item: Item) => ('rgb(250, 250, 250)'))
+      .style('fill', (item: Item) => (item.style.fillColor))
       .attr('x', 0)
       .attr('y', 0)
       .attr('width', '100%')
